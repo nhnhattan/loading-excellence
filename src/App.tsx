@@ -1,12 +1,14 @@
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
+import { BounceLoading } from "respinner";
 import "./App.css";
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [person, setPerson] = useState("agency");
+  const [person, setPerson] = useState("");
   const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const handleCopy = async () => {
     if (inputRef.current) {
@@ -41,29 +43,41 @@ function App() {
             <div className="w-full mx-auto">
               <img src="./img/tagline.png" alt="" />
             </div>
-            <div className="w-full flex flex-col gap-4 items-center justify-center mt-3">
+            <div className="w-3/5 mx-auto flex flex-col gap-4 items-center justify-center mt-3">
               <button
                 onClick={() => {
-                  setPerson("agency");
+                  setPerson("north");
                   setStep(1);
                 }}
-                className="w-4/5 relative hover:opacity-85 cursor-pointer"
+                className="w-full relative hover:opacity-85 cursor-pointer"
               >
                 <img src="./img/frameBtn.png" alt="" className="w-full" />
-                <p className="absolute text-nowrap top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#fff955] uppercase font-bold text-2xl">
-                  Đại lý
+                <p className="absolute text-nowrap top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#fff955] uppercase font-bold text-md">
+                  Agency miền bắc
                 </p>
               </button>
               <button
                 onClick={() => {
-                  setPerson("consultant");
+                  setPerson("central");
                   setStep(1);
                 }}
-                className="w-4/5 relative hover:opacity-85 cursor-pointer"
+                className="w-full relative hover:opacity-85 cursor-pointer"
               >
                 <img src="./img/frameBtn.png" alt="" className="w-full" />
-                <p className="absolute text-nowrap top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#fff955] uppercase font-bold text-2xl">
-                  Tư vấn viên
+                <p className="absolute text-nowrap top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#fff955] uppercase font-bold text-md">
+                  Agency miền trung
+                </p>
+              </button>
+              <button
+                onClick={() => {
+                  setPerson("southern");
+                  setStep(1);
+                }}
+                className="w-full relative hover:opacity-85 cursor-pointer"
+              >
+                <img src="./img/frameBtn.png" alt="" className="w-full" />
+                <p className="absolute text-nowrap top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#fff955] uppercase font-bold text-md">
+                  Agency miền nam
                 </p>
               </button>
             </div>
@@ -102,7 +116,7 @@ function App() {
                         className="w-full text-center text-white focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none py-2 px-2"
                       />
                     </div>
-                    <p className="text-white uppercase">nơi làm việc</p>
+                    {/* <p className="text-white uppercase">nơi làm việc</p>
                     <div className="bg-input w-4/5">
                       <select
                         className="w-[95%] text-sm text-center text-white uppercase font-bold
@@ -127,21 +141,39 @@ function App() {
                           Đà Nẵng
                         </option>
                       </select>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
-                <button
-                  onClick={() => {
-                    setStep(2);
-                  }}
-                  className="w-2/5 cursor-pointer hover:opacity-85"
-                >
-                  <img
-                    src="./img/submit.png"
-                    alt=""
-                    className="w-full relative z-30"
-                  />
-                </button>
+                <div className="w-full gap-4 flex items-center justify-center">
+                  <button
+                    onClick={() => {
+                      setStep(0);
+                      setPerson("");
+                    }}
+                    className="w-2/5 relative cursor-pointer hover:opacity-85"
+                  >
+                    <img src="./img/button.png" alt="" className="w-full" />
+                    <p className="absolute text-nowrap top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white uppercase font-bold text-base">
+                      Quay lại
+                    </p>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setStep(2);
+                      // setLoading(true);
+                      // setTimeout(() => {
+                      //   setLoading(false);
+                      // }, 2000);
+                    }}
+                    className="w-2/5 cursor-pointer hover:opacity-85"
+                  >
+                    <img
+                      src="./img/submit.png"
+                      alt=""
+                      className="w-full relative z-30"
+                    />
+                  </button>
+                </div>
               </form>
             </div>
             <img
@@ -304,6 +336,22 @@ function App() {
         ) : (
           <></>
         )}
+      </div>
+      <div
+        className={`fixed w-screen h-[100dvh] top-0 bg-black/75 flex flex-col items-center justify-center ${
+          loading ? "" : "hidden"
+        }`}
+      >
+        <BounceLoading
+          fill="#006452"
+          count={4}
+          gap={10}
+          barWidth={25}
+          barHeight={50}
+        />
+        <p className="text-white font-bold text-lg">
+          Vui lòng chờ trong giây lát!
+        </p>
       </div>
     </div>
   );
