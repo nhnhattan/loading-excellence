@@ -163,7 +163,7 @@ function App() {
                       setStep(2);
                       // setLoading(true);
                       // setTimeout(() => {
-                      //   setLoading(false);
+                        setLoading(false);
                       // }, 2000);
                     }}
                     className="w-2/5 cursor-pointer hover:opacity-85"
