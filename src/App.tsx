@@ -8,6 +8,7 @@ function App() {
 
   const [person, setPerson] = useState("");
   const [step, setStep] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
 
   const handleCopy = async () => {
